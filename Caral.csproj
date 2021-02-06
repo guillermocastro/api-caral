@@ -46,6 +46,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.4.1.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -142,9 +145,6 @@
     <Reference Include="Owin">
       <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb">
       <HintPath>packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
@@ -212,16 +212,20 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BalanceController.cs" />
     <Compile Include="Controllers\COAController.cs" />
     <Compile Include="Controllers\CurrencyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaymentMethodController.cs" />
+    <Compile Include="Controllers\StatementController.cs" />
+    <Compile Include="Controllers\TermController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202101170740089_Authentication.cs" />
-    <Compile Include="Migrations\202101170740089_Authentication.Designer.cs">
-      <DependentUpon>202101170740089_Authentication.cs</DependentUpon>
+    <Compile Include="Migrations\202102040515122_m01.cs" />
+    <Compile Include="Migrations\202102040515122_m01.Designer.cs">
+      <DependentUpon>202102040515122_m01.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -231,6 +235,9 @@
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PaymenMethod.cs" />
+    <Compile Include="Models\Statement.cs" />
+    <Compile Include="Models\Term.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -326,8 +333,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202101170740089_Authentication.resx">
-      <DependentUpon>202101170740089_Authentication.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202102040515122_m01.resx">
+      <DependentUpon>202102040515122_m01.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

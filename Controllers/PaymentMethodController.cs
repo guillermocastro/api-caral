@@ -11,11 +11,11 @@ using Caral.Models;
 
 namespace Caral.Controllers
 {
-    public class COAController : ApiController
+    public class PaymentMethodController : ApiController
     {
         public HttpResponseMessage Get()
         {
-            string query = @"SELECT [AccountId],[AccountName],[AccountType],[Description],[BalanceId],[StatementId],[IsDisabled] FROM [Accounting].[Account]";
+            string query = @"SELECT [PaymenMethodId],[PaymenMethodName],[AccountId],[IsDisabled] FROM [Accounting].[PaymenMethod] WHERE ISNULL([IsDisabled],'FALSE')='FALSE'";
             DataTable table = new DataTable();
             using (var con = new SqlConnection(ConfigurationManager.
                 ConnectionStrings["DefaultConnection"].ConnectionString))
@@ -27,17 +27,13 @@ namespace Caral.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.OK, table);
         }
-        public string Post(Account coa)
+        public string Post(PaymenMethod pay)
         {
             try
             {
-                string query = @"INSERT INTO [Accounting].[Account] VALUES (
-                    '" + coa.AccountId + @"'
-                    ,'" + coa.AccountName + @"'
-                    ,'" + coa.AccountType + @"'
-                    ,'" + coa.Description + @"'
-                    ,'" + coa.BalanceId + @"'
-                    ,'" + coa.StatementId + @"'
+                string query = @"INSERT INTO [Accounting].[PaymentMethod] VALUES (
+                    '" + pay.PaymentMethodName + @"'
+                    ,'" + pay.AccountId + @"'
                     ,'FALSE'
                    )";
                 DataTable table = new DataTable();
@@ -56,19 +52,14 @@ namespace Caral.Controllers
                 return e.Message;
             }
         }
-        public string Put(Account coa)
+        public string Put(PaymenMethod pay)
         {
             try
             {
-                string query = @"UPDATE [Accounting].[Account] SET 
-                    [AccountId]='" + coa.AccountId + @"'
-                    ,[AccountName]='" + coa.AccountName + @"'
-                    ,[AccountType]='" + coa.AccountType + @"'
-                    ,[Description]='" + coa.Description + @"'
-                    ,[BalanceId]='" + coa.BalanceId + @"'
-                    ,[StatementId]='" + coa.StatementId + @"'
-                    ,[IsDisabled]='" + coa.IsDisabled + @"'
-                    WHERE AccountId=" + coa.AccountId + @"";
+                string query = @"UPDATE [Accounting].[PaymentMethod] SET 
+                    [PaymentMethodName]='" + pay.PaymentMethodName + @"'
+                    ,[AccountId]='" + pay.AccountId + @"'
+                    WHERE [PaymentMethodId]=" + pay.PaymentMethodId + @"";
                 DataTable table = new DataTable();
                 using (var con = new SqlConnection(ConfigurationManager.
                     ConnectionStrings["DefaultConnection"].ConnectionString))
@@ -89,7 +80,7 @@ namespace Caral.Controllers
         {
             try
             {
-                string query = @"DELETE FROM [Accounting].[Account] WHERE AccountId=" + id + @"";
+                string query = @"DELETE FROM [Accounting].[PaymentMethod] WHERE [PaymentMethodId]=" + id + @"";
                 DataTable table = new DataTable();
                 using (var con = new SqlConnection(ConfigurationManager.
                     ConnectionStrings["DefaultConnection"].ConnectionString))

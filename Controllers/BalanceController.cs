@@ -11,11 +11,11 @@ using Caral.Models;
 
 namespace Caral.Controllers
 {
-    public class COAController : ApiController
+    public class BalanceController : ApiController
     {
         public HttpResponseMessage Get()
         {
-            string query = @"SELECT [AccountId],[AccountName],[AccountType],[Description],[BalanceId],[StatementId],[IsDisabled] FROM [Accounting].[Account]";
+            string query = @"SELECT [BalanceId],[BalanceName],[ParentId],[AccountList] FROM [Accounting].[Balance]";
             DataTable table = new DataTable();
             using (var con = new SqlConnection(ConfigurationManager.
                 ConnectionStrings["DefaultConnection"].ConnectionString))
@@ -27,18 +27,15 @@ namespace Caral.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.OK, table);
         }
-        public string Post(Account coa)
+        public string Post(Balance bal)
         {
             try
             {
-                string query = @"INSERT INTO [Accounting].[Account] VALUES (
-                    '" + coa.AccountId + @"'
-                    ,'" + coa.AccountName + @"'
-                    ,'" + coa.AccountType + @"'
-                    ,'" + coa.Description + @"'
-                    ,'" + coa.BalanceId + @"'
-                    ,'" + coa.StatementId + @"'
-                    ,'FALSE'
+                string query = @"INSERT INTO [Accounting].[Balance] VALUES (
+                    '" + bal.BalanceId + @"'
+                    ,'" + bal.BalanceName + @"'
+                    ,'" + bal.ParentId + @"'
+                    ,'" + bal.AccountList + @"'
                    )";
                 DataTable table = new DataTable();
                 using (var con = new SqlConnection(ConfigurationManager.
@@ -56,19 +53,16 @@ namespace Caral.Controllers
                 return e.Message;
             }
         }
-        public string Put(Account coa)
+        public string Put(Balance bal)
         {
             try
             {
-                string query = @"UPDATE [Accounting].[Account] SET 
-                    [AccountId]='" + coa.AccountId + @"'
-                    ,[AccountName]='" + coa.AccountName + @"'
-                    ,[AccountType]='" + coa.AccountType + @"'
-                    ,[Description]='" + coa.Description + @"'
-                    ,[BalanceId]='" + coa.BalanceId + @"'
-                    ,[StatementId]='" + coa.StatementId + @"'
-                    ,[IsDisabled]='" + coa.IsDisabled + @"'
-                    WHERE AccountId=" + coa.AccountId + @"";
+                string query = @"UPDATE [Accounting].[Balance] SET 
+                    [BalanceId]='" + bal.BalanceId + @"'
+                    ,[BalanceName]='" + bal.BalanceName + @"'
+                    ,[ParentId]='" + bal.ParentId + @"'
+                    ,[AccountList]='" + bal.AccountList + @"'
+                    WHERE BalanceId='" + bal.BalanceId + @"'";
                 DataTable table = new DataTable();
                 using (var con = new SqlConnection(ConfigurationManager.
                     ConnectionStrings["DefaultConnection"].ConnectionString))
@@ -89,7 +83,7 @@ namespace Caral.Controllers
         {
             try
             {
-                string query = @"DELETE FROM [Accounting].[Account] WHERE AccountId=" + id + @"";
+                string query = @"DELETE FROM [Accounting].[Balance] WHERE BalanceId='" + id + @"'";
                 DataTable table = new DataTable();
                 using (var con = new SqlConnection(ConfigurationManager.
                     ConnectionStrings["DefaultConnection"].ConnectionString))

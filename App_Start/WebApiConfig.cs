@@ -28,9 +28,9 @@ namespace Caral
                 defaults: new { id = RouteParameter.Optional }
             );
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
-            //config.EnableCors(new EnableCorsAttribute("*,http://localhost:4200", "*", "*"));
-            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors();
+            config.EnableCors(new EnableCorsAttribute("http://localhost:4200", "*", "*"));
+            //EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
+            //config.EnableCors();
         }
     }
 }

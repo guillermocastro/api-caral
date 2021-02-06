@@ -16,13 +16,10 @@ using Microsoft.Owin.Security.OAuth;
 using Caral.Models;
 using Caral.Providers;
 using Caral.Results;
-using System.Web.Http.Cors;
 
 namespace Caral.Controllers
 {
-    [Authorize]
     [RoutePrefix("api/Account")]
-    [EnableCorsAttribute("*", "*", "*")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
@@ -323,7 +320,6 @@ namespace Caral.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        [EnableCorsAttribute("*", "*", "*")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)

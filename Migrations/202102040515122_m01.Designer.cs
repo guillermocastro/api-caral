@@ -7,13 +7,13 @@ namespace Caral.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Authentication : IMigrationMetadata
+    public sealed partial class m01 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Authentication));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(m01));
         
         string IMigrationMetadata.Id
         {
-            get { return "202101170740089_Authentication"; }
+            get { return "202102040515122_m01"; }
         }
         
         string IMigrationMetadata.Source

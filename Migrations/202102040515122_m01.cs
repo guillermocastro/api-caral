@@ -3,7 +3,7 @@ namespace Caral.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Authentication : DbMigration
+    public partial class m01 : DbMigration
     {
         public override void Up()
         {
